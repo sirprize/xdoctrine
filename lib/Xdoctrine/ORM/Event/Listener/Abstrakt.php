@@ -16,7 +16,10 @@
 namespace Xdoctrine\Orm\Event\Listener;
 
 
-abstract class Abstrakt
+require_once 'Xdoctrine/ORM/Event/Listener/Interfaze.php';
+
+
+abstract class Abstrakt implements \Xdoctrine\ORM\Event\Listener\Interfaze
 {
 	
 	
@@ -30,42 +33,6 @@ abstract class Abstrakt
 		$this->_entityClassName = $entityClassName;
 	}
 	
-	/*
-	public function isRegistered(\Doctrine\Common\EventManager $eventManager)
-	{
-		return ($this->getRegisteredInstance($eventManager) !== null);
-	}
-	
-	
-	public function getRegisteredInstance(\Doctrine\Common\EventManager $eventManager)
-	{
-		foreach($this->_events as $event)
-		{
-			if($eventManager->hasListeners($event))
-			{
-				foreach($eventManager->getListeners($event) as $listener)
-				{
-					if($listener instanceof $this)
-					{
-						return $listener;
-					}
-				}
-			}
-		}
-		
-		return null;
-	}
-	
-	
-	public function register(\Doctrine\Common\EventManager $eventManager)
-	{
-		#if(!$this->isRegistered($eventManager))
-		#{
-			$eventManager->addEventListener($this->_events, $this);
-			return $this;
-		#}
-	}
-	*/
 	
 	public function getEvents()
 	{
