@@ -48,7 +48,8 @@ class ZendSQLLogger implements \Doctrine\DBAL\Logging\SQLLogger
     }
 	
 	
-    function logSQL($sql, array $params = null)
+	
+	public function startQuery($sql, array $params = null, array $types = null)
 	{
 		$p = '';
 		
@@ -64,4 +65,8 @@ class ZendSQLLogger implements \Doctrine\DBAL\Logging\SQLLogger
 		$this->getZendLog()->debug($sql);
 		$this->getZendLog()->debug("PARAMS: $p");
 	}
+
+    
+    public function stopQuery()
+	{}
 }
