@@ -17,7 +17,7 @@
 namespace Xdoctrine\ORM\Event\Listener;
 
 
-require_once 'Xdoctrine/ORM/Event/Listener/Abstrakt.php';
+#require_once 'Xdoctrine/ORM/Event/Listener/Abstrakt.php';
 
 
 class Updates extends \Xdoctrine\ORM\Event\Listener\Abstrakt

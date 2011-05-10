@@ -16,7 +16,7 @@
 namespace Xdoctrine\Orm\Event\Listener;
 
 
-require_once 'Xdoctrine/ORM/Event/Listener/Interfaze.php';
+#require_once 'Xdoctrine/ORM/Event/Listener/Interfaze.php';
 
 
 abstract class Abstrakt implements \Xdoctrine\ORM\Event\Listener\Interfaze

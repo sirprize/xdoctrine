@@ -17,7 +17,7 @@
 namespace Xdoctrine\DBAL\Logging;
 
 
-require_once 'Doctrine/DBAL/Logging/SQLLogger.php';
+#require_once 'Doctrine/DBAL/Logging/SQLLogger.php';
 
 
 class ZendSQLLogger implements \Doctrine\DBAL\Logging\SQLLogger

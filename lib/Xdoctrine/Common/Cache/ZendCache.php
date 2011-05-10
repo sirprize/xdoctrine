@@ -17,7 +17,7 @@
 namespace Xdoctrine\Common\Cache;
 
 
-require_once 'Doctrine/Common/Cache/AbstractCache.php';
+#require_once 'Doctrine/Common/Cache/AbstractCache.php';
 
 
 class ZendCache extends \Doctrine\Common\Cache\AbstractCache
