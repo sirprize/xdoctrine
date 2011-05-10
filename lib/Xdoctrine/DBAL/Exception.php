@@ -8,12 +8,9 @@
  * @license    New BSD License
  */
 
-namespace Xdoctrine\Orm\Event\Listener;
+
+namespace Xdoctrine\DBAL;
 
 
-interface Interfaze
-{
-	
-	public function getEvents();
-	
-}
+class Exception extends \Exception
+{}

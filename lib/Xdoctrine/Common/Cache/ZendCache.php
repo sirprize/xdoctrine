@@ -3,21 +3,13 @@
 /**
  * Xdoctrine - Sirprize's Doctrine2 Extensions
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- *
- * @package    Xzend
- * @copyright  Copyright (c) 2009, Christian Hoegl, Switzerland (http://sitengine.org)
- * @license    http://sitengine.org/license/new-bsd     New BSD License
+ * @package    Xdoctrine
+ * @copyright  Copyright (c) 2010, Christian Hoegl, Switzerland (http://sirprize.me)
+ * @license    New BSD License
  */
 
 
 namespace Xdoctrine\Common\Cache;
-
-
-#require_once 'Doctrine/Common/Cache/AbstractCache.php';
 
 
 class ZendCache extends \Doctrine\Common\Cache\AbstractCache
@@ -44,6 +36,11 @@ class ZendCache extends \Doctrine\Common\Cache\AbstractCache
      */
     public function getZendCache()
     {
+		if($this->_zendCache === null)
+		{
+			throw new \Xdoctrine\DBAL\Exception('call setZendCache() before '.__METHOD__);
+		}
+		
         return $this->_zendCache;
     }
 
