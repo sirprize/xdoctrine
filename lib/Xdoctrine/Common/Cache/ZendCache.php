@@ -12,7 +12,7 @@
 namespace Xdoctrine\Common\Cache;
 
 
-class ZendCache extends \Doctrine\Common\Cache\AbstractCache
+class ZendCache extends \Doctrine\Common\Cache\CacheProvider
 {
     /**
      * @var \Zend_Cache_Core
@@ -38,7 +38,7 @@ class ZendCache extends \Doctrine\Common\Cache\AbstractCache
     {
 		if($this->_zendCache === null)
 		{
-			throw new \Xdoctrine\DBAL\Exception('call setZendCache() before '.__METHOD__);
+			throw new \Xdoctrine\Common\Exception('call setZendCache() before '.__METHOD__);
 		}
 		
         return $this->_zendCache;
@@ -47,37 +47,58 @@ class ZendCache extends \Doctrine\Common\Cache\AbstractCache
     /**
      * {@inheritdoc}
      */
-    protected function _doFetch($id) 
+    protected function doFetch($id) 
     {
-        return $this->_zendCache->load($this->_prepareId($id));
+        return $this->getZendCache()->load($this->prepareId($id));
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function _doContains($id)
+    protected function doContains($id)
     {
-        return (bool) $this->_zendCache->test($this->_prepareId($id));
+        return (bool) $this->getZendCache()->test($this->prepareId($id));
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function _doSave($id, $data, $lifeTime = false)
+    protected function doSave($id, $data, $lifeTime = false)
     {
-		return $this->_zendCache->save($data, $this->_prepareId($id), array(), $lifeTime);
+		return $this->getZendCache()->save($data, $this->prepareId($id), array(), $lifeTime);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function _doDelete($id) 
+    protected function doDelete($id) 
     {
-        return $this->_zendCache->remove($this->_prepareId($id));
+        return $this->getZendCache()->remove($this->prepareId($id));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function doFlush() 
+    {
+        foreach($this->getIds() as $id)
+        {
+            $this->doDelete($id);
+        }
+        
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function doGetStats()
+    {
+        return null;
     }
 	
 	
-	protected function _prepareId($id)
+	protected function prepareId($id)
 	{
 		return preg_replace('/[^a-zA-Z0-9_]/', '_', $id);
 	}
@@ -85,6 +106,6 @@ class ZendCache extends \Doctrine\Common\Cache\AbstractCache
 	
 	public function getIds()
 	{
-		return $this->_zendCache->getIds();
+		return $this->getZendCache()->getIds();
 	}
 }
